@@ -7,10 +7,10 @@ public class nodeScript : MonoBehaviour {
 	GameObject[] neighbours = new GameObject[8];
 	bool haveNeighbours = false;
 	float timer = 0;
+	bool destroyCheck = false;
 	// Use this for initialization
 	void Start () {
         temp = transform.position + new Vector3(0f, -3.8f, 0f);
-
 	}
 	
 	// Update is called once per frame
@@ -36,9 +36,16 @@ public class nodeScript : MonoBehaviour {
 		}
 		else 
 			timer += Time.deltaTime;
+	}
 
-        
-
+	void LateUpdate()
+	{
+		Debug.DrawLine(transform.position, transform.position - Vector3.up*20, Color.magenta);
+		if(!destroyCheck)
+		{
+			destroyMe();
+			destroyCheck = true;
+		}
 	}
 
 	//GET ALL NEIGHBOURING NODES TO CURRENT NODE
@@ -108,9 +115,20 @@ public class nodeScript : MonoBehaviour {
 		Debug.DrawLine (transform.position, temp);
 	}
 
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "wall")
-            Destroy(gameObject);
-    }
+	void destroyMe()
+	{
+		Debug.DrawLine(transform.position, transform.position - Vector3.up*20, Color.magenta);
+		RaycastHit hit ;
+		if(Physics.Raycast(transform.position, transform.position - Vector3.up*20, out hit) && hit.collider.tag == "wall")
+		{
+			Debug.Log(hit.collider.name + " was hit");
+			Destroy (gameObject);
+		}
+	}
+
+//    void OnCollisionEnter(Collision other)
+//    {
+//        if (other.gameObject.tag == "wall")
+//            Destroy(gameObject);
+//    }
 }
