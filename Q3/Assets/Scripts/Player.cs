@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 	bool firstClick = true;
@@ -30,10 +31,34 @@ public class Player : MonoBehaviour {
 					}else{
 						hit.transform.renderer.material.color = Color.green;
 						endPos = hit.transform;
+						nodeScript temp = startPos.gameObject.GetComponent<nodeScript>();
+						temp.setInfo(endPos.gameObject);
 						onTheMove = true;
 					}
 				}
 			}
 		}
 	}
+
+	List<Transform> pathfindAStar()
+	{
+		SortedList openList = new SortedList();
+		List<GameObject> closedList = new List<GameObject>();
+		openList.Add(startPos.GetComponent<nodeScript>().info.getTotalCost(), startPos.gameObject);
+
+		while(openList.Count() > 0)
+		{
+			GameObject temp = openList.RemoveAt(0);
+		}
+
+		return null;
+
+	}
+
+	void processNode(GameObject currentNode)
+	{
+
+	}
+
+
 }

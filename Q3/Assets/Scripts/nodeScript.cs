@@ -7,10 +7,12 @@ public class nodeScript : MonoBehaviour {
 	GameObject[] neighbours = new GameObject[8];
 	bool haveNeighbours = false;
 	float timer = 0;
+	public NodeInfo info;
+
 	// Use this for initialization
 	void Start () {
         temp = transform.position + new Vector3(0f, -3.8f, 0f);
-
+		//info = new NodeInfo(gameObject);
 	}
 	
 	// Update is called once per frame
@@ -113,4 +115,9 @@ public class nodeScript : MonoBehaviour {
         if (other.gameObject.tag == "wall")
             Destroy(gameObject);
     }
+
+	public void setInfo(GameObject endNode)
+	{
+		info = new NodeInfo(this.gameObject, endNode );
+	}
 }
