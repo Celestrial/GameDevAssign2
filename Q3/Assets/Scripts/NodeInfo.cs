@@ -4,16 +4,16 @@ using System;
 
 public class NodeInfo {
 	GameObject node;
-	GameObject connection;
-	float costSoFar;
+	public GameObject connection;
+	public float costSoFar;
 	float estimatedTotalCost;
 	static float distanceWeight = 1;
 
-	public NodeInfo(GameObject currentNode, GameObject endNode)
+	public NodeInfo(GameObject connecting, int costSoFar, GameObject currentNode, GameObject endNode)
 	{
 		node = currentNode;
-		connection = null;
-		costSoFar = 0;
+		connection = connecting;
+		this.costSoFar = costSoFar + 1;
 		setTotalCost(currentNode.transform, endNode.transform);
 	}
 

@@ -33,7 +33,7 @@ public class nodeScript : MonoBehaviour {
 		//GET NODE NEIGHBOURS, COLOR BLACK AFTER 3 SEC
 		if(timer > 1 && !haveNeighbours)
 		{
-			getNeighbours ();
+			regNeighbours ();
 			haveNeighbours = true;
 		}
 		else 
@@ -44,7 +44,7 @@ public class nodeScript : MonoBehaviour {
 	}
 
 	//GET ALL NEIGHBOURING NODES TO CURRENT NODE
-	void getNeighbours ()
+	void regNeighbours ()
 	{
 		RaycastHit hit;
 
@@ -116,8 +116,18 @@ public class nodeScript : MonoBehaviour {
             Destroy(gameObject);
     }
 
-	public void setInfo(GameObject endNode)
+//	public void setInfo(GameObject endNode)
+//	{
+//		info = new NodeInfo(0, this.gameObject, endNode );
+//	}
+
+	public void setInfo(GameObject connection, int costSoFar, GameObject endNode)
 	{
-		info = new NodeInfo(this.gameObject, endNode );
+		info = new NodeInfo(connection, costSoFar, this.gameObject, endNode );
+	}
+
+	public GameObject[] getNeighbours()
+	{
+		return neighbours;
 	}
 }
