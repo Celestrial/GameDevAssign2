@@ -1,19 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AStarAlgorithm.cs">
     <Files>
-      <File FileName="Assets\Scripts\NodeRecord.cs" Line="22" Column="1" />
+      <File FileName="Assets\Scripts\AStarAlgorithm.cs" Line="76" Column="1" />
+      <File FileName="Assets\Scripts\NodeRecord.cs" Line="43" Column="2" />
       <File FileName="Assets\Scripts\Player.cs" Line="88" Column="5" />
-      <File FileName="Assets\Scripts\nodeScript.cs" Line="124" Column="1" />
-      <File FileName="Assets\Scripts\AStarAlgorithm.cs" Line="47" Column="1" />
+      <File FileName="Assets\Scripts\nodeScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FlexHeap.cs" Line="314" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\Player.cs" line="59" />
-      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="44" />
-      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="45" />
-      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="36" />
+      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="62" />
+      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="54" />
+      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="76" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

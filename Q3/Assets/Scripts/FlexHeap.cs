@@ -302,6 +302,18 @@ namespace comp476a2
           return nextNode - 1;
       }
 
+		public NodeRecord contains(GameObject other)
+		{
+			for(int i = 1; i <= myMinTree.size(); ++i)
+			{
+				if(myMinTree.array[i].value.getGameObject() == other)
+				{
+					return myMinTree.array[i].value;
+				}
+			}
+			return null;
+		}
+
       ////@Override
       //public string toString() {
       //  return myMinTree.toString();
@@ -310,5 +322,7 @@ namespace comp476a2
       public BinTree getMyMinTree() {//FOR TESTING ONLY
         return myMinTree;
       }//for debugging only!!!
+
+
     }
 }
