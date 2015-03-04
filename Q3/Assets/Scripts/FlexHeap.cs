@@ -170,7 +170,7 @@ namespace comp476a2
         myMinTree.array = tempArray;
       }//double size of underlying array
 
-      public void insert(float key, GameObject value) {
+      public void insert(float key, NodeRecord value) {
         Node newNode = new Node(key, value);
         myMinTree.array[nextNode] = newNode;
         ++nextNode;

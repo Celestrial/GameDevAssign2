@@ -54,13 +54,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AStarAlgorithm.cs" />
     <Compile Include="Assets\Scripts\BinTree.cs" />
     <Compile Include="Assets\Scripts\FlexHeap.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
-    <Compile Include="Assets\Scripts\NodeInfo.cs" />
+    <Compile Include="Assets\Scripts\NodeRecord.cs" />
+    <Compile Include="Assets\Scripts\NodeScript.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\mapScript.cs" />
-    <Compile Include="Assets\Scripts\nodeScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

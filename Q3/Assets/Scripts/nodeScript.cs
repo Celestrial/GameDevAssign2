@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class nodeScript : MonoBehaviour {
+public class NodeScript : MonoBehaviour {
     public const int LINE_LENGTH = 2;
     Vector3 temp;
 	GameObject[] neighbours = new GameObject[8];
 	bool haveNeighbours = false;
 	float timer = 0;
-	public NodeInfo info;
+	//public AStarAlgorithm info;
 
 	// Use this for initialization
 	void Start () {
@@ -110,24 +110,14 @@ public class nodeScript : MonoBehaviour {
 		Debug.DrawLine (transform.position, temp);
 	}
 
+    public GameObject[] getNeighbours()
+    {
+        return neighbours;
+    }
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "wall")
             Destroy(gameObject);
     }
 
-//	public void setInfo(GameObject endNode)
-//	{
-//		info = new NodeInfo(0, this.gameObject, endNode );
-//	}
-
-	public void setInfo(GameObject connection, int costSoFar, GameObject endNode)
-	{
-		info = new NodeInfo(connection, costSoFar, this.gameObject, endNode );
-	}
-
-	public GameObject[] getNeighbours()
-	{
-		return neighbours;
-	}
 }

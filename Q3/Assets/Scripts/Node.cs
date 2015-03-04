@@ -6,9 +6,9 @@ namespace comp476a2
     public class Node
     {
         public float key;//heap key
-        public GameObject value;//heap value
+        public NodeRecord value;//heap value
 
-        public Node(float key, GameObject value)
+        public Node(float key, NodeRecord value)
         {//constructor for node inner class
             this.key = key;
             this.value = value;
