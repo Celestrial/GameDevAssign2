@@ -52,7 +52,6 @@ namespace comp476a2
               }
               else
               {
-                  Node tempNode;
                   if ((position % 2) == 0)
                   {
                       return position / 2;

@@ -7,18 +7,27 @@ namespace comp476a2
     public class Player : MonoBehaviour
     {
         bool firstClick = true;
+		bool playerSpawned = false;
         bool onTheMove = false;
         GameObject startPos;
         GameObject endPos;
+        AStarAlgorithm pathFinder;
+		Vector3[] solutionPath;
+        int targetNode = 0;
+        float movementSpeed = 20f;
+		float satisfactionRadius = 0.25f;
+		public GameObject walls;
+		mapScript wallScript;
         // Use this for initialization
         void Start()
         {
-
+			wallScript = walls.GetComponent<mapScript>();
         }
 
         // Update is called once per frame
         void Update()
         {
+
             if (!onTheMove)
             {
                 if (Input.GetButtonDown("Fire1"))
@@ -40,59 +49,60 @@ namespace comp476a2
                             hit.transform.renderer.material.color = Color.green;
                             endPos = hit.collider.gameObject;
                             NodeScript temp = startPos.gameObject.GetComponent<NodeScript>();
-                            //temp.setInfo(null,0, endPos.gameObject);
                             onTheMove = true;
-                            //pathfindAStar();
-                            AStarAlgorithm pathFinder = new AStarAlgorithm(startPos, endPos);
+                            pathFinder = new AStarAlgorithm(startPos, endPos);
                             pathFinder.findPath();
+                            onTheMove = true;
                         }
+                    }
+                }
+            }
+            else
+            {
+                if(null == solutionPath)
+                    converSolutionPath();
+                else
+                {
+                    if(targetNode != solutionPath.Length)
+                    {
+						transform.position += getMovement(solutionPath[targetNode]) * Time.deltaTime * 5;
+                        if((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
+                        {
+
+                            ++targetNode;
+                        }
+                    }
+                    else
+                    {
+                        targetNode = 0;
+                        onTheMove = false;
+                        //firstClick = true;
+                        pathFinder = null;
+                        solutionPath = null;
+						wallScript.nodeReset();
+						startPos = endPos; 
+						startPos.renderer.material.color = Color.red;
+						endPos = null;
                     }
                 }
             }
         }
 
-        //List<Transform> pathfindAStar()
-        //{
+		private Vector3 getMovement(Vector3 target)
+		{
+			Vector3 temp = (target - transform.position);
+			Vector3.ClampMagnitude(temp, movementSpeed);
+			return temp;
+		}
 
-
-        //    //FlexHeap openList = new FlexHeap();
-        //    //List<GameObject> closedList = new List<GameObject>();
-        //    //openList.insert(startPos.GetComponent<nodeScript>().info.getTotalCost(), startPos.gameObject);
-
-        //    //while (openList.count() > 0)
-        //    //{
-        //    //    Node temp = openList.remove();
-        //    //    GameObject tempGO = temp.value;
-        //    //    if(tempGO.transform == endPos)
-        //    //        break;
-
-        //    //    getConnections(ref tempGO, ref openList, ref closedList);
-        //    //}
-        //    return null;
-        //}
-
-        //void getConnections(ref GameObject curNode, ref FlexHeap openList, ref List<GameObject> closedList)
-        //{
-        //    List<GameObject> connectedNodes = new List<GameObject>();
-        //    nodeScript curScript = curNode.GetComponent<nodeScript>();
-
-        //    foreach(GameObject neighbour in curScript.getNeighbours())
-        //    {
-        //        if(closedList.Contains(neighbour))
-        //        {
-
-        //        }
-        //        nodeScript temp = neighbour.GetComponent<nodeScript>();
-        //        temp.setInfo(curNode, curScript.info.costSoFar, endPos.gameObject);
-        //        openList.insert(temp.info.getTotalCost(), neighbour);
-        //    }
-        //}
-
-        //void processNode(GameObject currentNode)
-        //{
-
-        //}
-
-
+        private void converSolutionPath()
+        {
+            solutionPath = new Vector3[pathFinder.getSolutionPath().Count];
+            for (int i = 0; i < solutionPath.Length; ++i)
+            {
+                GameObject temp = (GameObject)pathFinder.getSolutionPath()[i];
+                solutionPath[i] = temp.transform.position;
+            }
+        }
     }
 }

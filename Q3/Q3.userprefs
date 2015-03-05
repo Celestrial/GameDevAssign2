@@ -2,19 +2,33 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AStarAlgorithm.cs">
     <Files>
-      <File FileName="Assets\Scripts\AStarAlgorithm.cs" Line="76" Column="1" />
-      <File FileName="Assets\Scripts\NodeRecord.cs" Line="43" Column="2" />
-      <File FileName="Assets\Scripts\Player.cs" Line="88" Column="5" />
+      <File FileName="Assets\Scripts\Player.cs" Line="79" Column="27" />
+      <File FileName="Assets\Scripts\mapScript.cs" Line="19" Column="1" />
+      <File FileName="Assets\Scripts\AStarAlgorithm.cs" Line="80" Column="50" />
+      <File FileName="Assets\Scripts\NodeRecord.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\nodeScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FlexHeap.cs" Line="314" Column="16" />
+      <File FileName="Assets\Scripts\FlexHeap.cs" Line="55" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="AStarAlgorithm.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\Player.cs" line="59" />
-      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="62" />
-      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="54" />
-      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\AStarAlgorithm.cs" line="76" />
+      <Breakpoint hitAction="PrintExpression" traceExpression="{solutionPath}" file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\Player.cs" line="62" />
+      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\mapScript.cs" line="24" />
+      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\mapScript.cs" line="26" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

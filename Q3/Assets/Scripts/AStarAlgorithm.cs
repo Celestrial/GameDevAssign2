@@ -41,7 +41,7 @@ namespace comp476a2
 
 				if(currentNode.getGameObject() == endNode)
 				{
-					solutionPath = getSolutionPath(currentNode);
+					solutionPath = findSolutionPath(currentNode);
 					break;
 				}
 
@@ -57,7 +57,11 @@ namespace comp476a2
             return null;
         }
 
-		ArrayList getSolutionPath(NodeRecord currentNode)
+        public ArrayList getSolutionPath()
+        {
+            return solutionPath;
+        }
+		ArrayList findSolutionPath(NodeRecord currentNode)
 		{
 			ArrayList temp = new ArrayList();
 			GameObject currentObject = currentNode.getGameObject();
@@ -73,6 +77,7 @@ namespace comp476a2
 
 			temp.Reverse();
 			endNode.renderer.material.color = Color.green;
+			startNode.renderer.material.color = Color.red;
 			return temp;
 		}
 
