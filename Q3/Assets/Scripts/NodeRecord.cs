@@ -10,7 +10,7 @@ namespace comp476a2
 		NodeRecord connection;
         int costSoFar;
         float estimatedTotalCost;
-        const int heuristicWeight = 1;
+        public static float heuristicWeight = 1f;
 
 
         public NodeRecord(GameObject curNode, NodeRecord connectNode, int prevNodePathCost, GameObject destNode)

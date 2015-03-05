@@ -49,9 +49,9 @@ namespace comp476a2
 				closedList.Add(currentNode);
 
 
-                //DEBUG CASE
-                if (openList.count() > 1000000)
-                    break;
+                ////DEBUG CASE
+                //if (openList.count() > 1000000)
+                //    break;
             }
 
             return null;
@@ -102,8 +102,6 @@ namespace comp476a2
                         if(currentNeighbour.getCostSoFar() < nodeInClosed.getCostSoFar())
 						{
 							closedList.Remove(nodeInClosed);
-//************************************************NOT SURE IF WE SHOULD ADD BACK TO OPEN LIST*******************************************************
-//							openList.insert(currentNeighbour.getEstimatedTotalCost(), currentNeighbour);
 						}else{
 							continue;//SKIP THIS NODE AND DO NOT ADD TO OPEN LIST SINCE PATH IS NOT BETTER
 						}
@@ -112,7 +110,6 @@ namespace comp476a2
 					{
 						if(currentNeighbour.getCostSoFar() < nodeInOpen.getCostSoFar())
 						{
-							//PROBABLY WILL NOT WORK SINCE THIS IS NOT A REFERENCE, NEED TO CHECK HOW C# HANDLES OBJECTS
 							nodeInOpen = currentNeighbour;
 						}else{
 							continue;

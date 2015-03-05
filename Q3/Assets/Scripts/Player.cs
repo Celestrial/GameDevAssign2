@@ -56,6 +56,13 @@ namespace comp476a2
                         }
                     }
                 }
+                if(Input.GetKeyDown(KeyCode.D))
+                {
+                    if (NodeRecord.heuristicWeight == 1)
+                        NodeRecord.heuristicWeight = 0;
+                    else
+                        NodeRecord.heuristicWeight = 1;
+                }
             }
             else
             {
