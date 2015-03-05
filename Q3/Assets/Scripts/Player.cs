@@ -86,7 +86,7 @@ namespace comp476a2
                         //firstClick = true;
                         pathFinder = null;
                         solutionPath = null;
-						wallScript.nodeReset();
+						wallScript.nodeColorReset();
 						startPos = endPos; 
 						startPos.renderer.material.color = Color.red;
 						endPos = null;

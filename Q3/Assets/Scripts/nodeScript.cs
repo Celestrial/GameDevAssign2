@@ -3,8 +3,9 @@ using System.Collections;
 
 public class NodeScript : MonoBehaviour {
     public const int LINE_LENGTH = 2;
+	public string cluster;
     Vector3 temp;
-	GameObject[] neighbours = new GameObject[8];
+	public GameObject[] neighbours = new GameObject[8];
 	bool haveNeighbours = false;
 	float timer = 0;
 	//public AStarAlgorithm info;
