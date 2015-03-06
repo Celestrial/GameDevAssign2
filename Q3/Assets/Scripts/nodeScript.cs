@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class NodeScript : MonoBehaviour {
+public class nodeScript : MonoBehaviour {
     public const int LINE_LENGTH = 2;
 	public string cluster;
     Vector3 temp;
@@ -39,18 +39,24 @@ public class NodeScript : MonoBehaviour {
             if (transform.parent != null && transform.parent.tag == "POVMap")
             {
                 regPOVNeighbours();
+				getCluster();
             }
             else
+			{
                 regNeighbours();
+				getCluster();
+			}
 			haveNeighbours = true;
 		}
 		else 
 			timer += Time.deltaTime;
-
-        
-
 	}
-
+	void getCluster()
+	{
+		RaycastHit hit;
+		Physics.Raycast(transform.position, -transform.up * 20, out hit);
+		cluster = hit.transform.name;
+	}
     void regPOVNeighbours()
     {
         nodesMasterList = new List<GameObject>();

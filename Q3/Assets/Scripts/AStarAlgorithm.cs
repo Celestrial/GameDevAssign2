@@ -83,7 +83,7 @@ namespace comp476a2
 
         void getNeighbours(NodeRecord currentNode)
         {
-            GameObject[] neighbours = currentNode.getGameObject().GetComponent<NodeScript>().getNeighbours();
+            GameObject[] neighbours = currentNode.getGameObject().GetComponent<nodeScript>().getNeighbours();
 
 			//GO THROUGH THE NEIGHBOURS AND EITHER ADD OPEN LIST, UPDATE OPEN LIST, REMOVE FROM CLOSE LIST OR SKIP
             foreach(GameObject neighbour in neighbours)

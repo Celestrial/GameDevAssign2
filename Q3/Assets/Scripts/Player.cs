@@ -48,7 +48,7 @@ namespace comp476a2
                         {
                             hit.transform.renderer.material.color = Color.green;
                             endPos = hit.collider.gameObject;
-                            NodeScript temp = startPos.gameObject.GetComponent<NodeScript>();
+                            nodeScript temp = startPos.gameObject.GetComponent<nodeScript>();
                             onTheMove = true;
                             pathFinder = new AStarAlgorithm(startPos, endPos);
                             pathFinder.findPath();
@@ -68,36 +68,41 @@ namespace comp476a2
                     wallScript.switchMapType();
                 }
             }
-            else
-            {
-                if(null == solutionPath)
-                    converSolutionPath();
-                else
-                {
-                    if(targetNode != solutionPath.Length)
-                    {
-						transform.position += getMovement(solutionPath[targetNode]) * Time.deltaTime * 5;
-                        if((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
-                        {
 
-                            ++targetNode;
-                        }
-                    }
-                    else
-                    {
-                        targetNode = 0;
-                        onTheMove = false;
-                        //firstClick = true;
-                        pathFinder = null;
-                        solutionPath = null;
+        }
+
+		void FixedUpdate()
+		{
+			if(onTheMove)
+			{
+				if(null == solutionPath)
+					converSolutionPath();
+				else
+				{
+					if(targetNode != solutionPath.Length)
+					{
+						transform.position += getMovement(solutionPath[targetNode]) * Time.deltaTime * 5;
+						if((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
+						{
+							
+							++targetNode;
+						}
+					}
+					else
+					{
+						targetNode = 0;
+						onTheMove = false;
+						//firstClick = true;
+						pathFinder = null;
+						solutionPath = null;
 						wallScript.nodeColorReset();
 						startPos = endPos; 
 						startPos.renderer.material.color = Color.red;
 						endPos = null;
-                    }
-                }
-            }
-        }
+					}
+				}
+			}
+		}
 
 		private Vector3 getMovement(Vector3 target)
 		{
