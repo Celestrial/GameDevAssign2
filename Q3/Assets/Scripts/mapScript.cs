@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 public class mapScript : MonoBehaviour {
     public GameObject node;
+    public GameObject POVNodesOriginal;
+	GameObject POVNodesClone;
     public int dimention = 100;
+    public Vector3 POVMapStartPos = new Vector3(46.604f, 38.703f, 33.637f);
 	public List<GameObject> masterNodeList;
 	bool nodeMap = true;
 	// Use this for initialization
@@ -43,8 +46,8 @@ public class mapScript : MonoBehaviour {
 	}
 	public void generatePOVMap()
 	{
-
-	}
+        POVNodesClone = (GameObject)Instantiate(POVNodesOriginal, POVMapStartPos, Quaternion.identity);
+    }
 	public void generateNodeMap()
 	{
 		masterNodeList = new List<GameObject>();
@@ -58,7 +61,7 @@ public class mapScript : MonoBehaviour {
 	}
 	public void destroyPOVMap()
 	{
-
+        Destroy(POVNodesClone);
 	}
 	public void destroyNodeMap()
 	{

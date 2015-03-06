@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NodeScript : MonoBehaviour {
     public const int LINE_LENGTH = 2;
 	public string cluster;
     Vector3 temp;
 	public GameObject[] neighbours = new GameObject[8];
+    List<GameObject> nodesMasterList;
 	bool haveNeighbours = false;
 	float timer = 0;
 	//public AStarAlgorithm info;
@@ -34,7 +36,12 @@ public class NodeScript : MonoBehaviour {
 		//GET NODE NEIGHBOURS, COLOR BLACK AFTER 3 SEC
 		if(timer > 1 && !haveNeighbours)
 		{
-			regNeighbours ();
+            if (transform.parent != null && transform.parent.tag == "POVMap")
+            {
+                regPOVNeighbours();
+            }
+            else
+                regNeighbours();
 			haveNeighbours = true;
 		}
 		else 
@@ -44,7 +51,17 @@ public class NodeScript : MonoBehaviour {
 
 	}
 
-	//GET ALL NEIGHBOURING NODES TO CURRENT NODE
+    void regPOVNeighbours()
+    {
+        nodesMasterList = new List<GameObject>();
+        int count = transform.parent.childCount;
+        for(int i = 0; i < count; ++i)
+        {
+            nodesMasterList.Add(transform.parent.GetChild(i).gameObject);
+        }
+    }
+
+	//GET ALL NEIGHBOURING NODES TO CURRENT NODE IN NODE MAP
 	void regNeighbours ()
 	{
 		RaycastHit hit;

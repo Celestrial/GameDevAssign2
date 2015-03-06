@@ -63,6 +63,10 @@ namespace comp476a2
                     else
                         NodeRecord.heuristicWeight = 1;
                 }
+                if(Input.GetKeyDown(KeyCode.P))
+                {
+                    wallScript.switchMapType();
+                }
             }
             else
             {
