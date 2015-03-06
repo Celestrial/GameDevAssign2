@@ -6,7 +6,7 @@ public class NodeScript : MonoBehaviour {
     public const int LINE_LENGTH = 2;
 	public string cluster;
     Vector3 temp;
-	public GameObject[] neighbours = new GameObject[8];
+	public GameObject[] neighbours = new GameObject[12];
     List<GameObject> nodesMasterList;
 	bool haveNeighbours = false;
 	float timer = 0;
@@ -58,6 +58,28 @@ public class NodeScript : MonoBehaviour {
         for(int i = 0; i < count; ++i)
         {
             nodesMasterList.Add(transform.parent.GetChild(i).gameObject);
+        }
+        makePOVLinks();
+    }
+
+    void makePOVLinks()
+    {
+        int count = 0;
+        foreach(GameObject node in nodesMasterList)
+        {
+            if(node.transform != transform)
+            {
+                Debug.Log(count);
+
+
+                RaycastHit hit;
+                Physics.Linecast(transform.position, node.transform.position, out hit);
+                if(hit.transform == node.transform && count < neighbours.Length)
+                {
+                    
+                    neighbours[count++] = node;
+                }
+            }
         }
     }
 
