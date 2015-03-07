@@ -48,7 +48,7 @@ namespace comp476a2
                         {
                             hit.transform.renderer.material.color = Color.green;
                             endPos = hit.collider.gameObject;
-                            nodeScript temp = startPos.gameObject.GetComponent<nodeScript>();
+                            NodeScript temp = startPos.gameObject.GetComponent<NodeScript>();
                             onTheMove = true;
                             pathFinder = new AStarAlgorithm(startPos, endPos);
                             pathFinder.findPath();
