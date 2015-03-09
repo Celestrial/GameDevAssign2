@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: 56e67fd3647d11744884994886fc5998
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - node: {fileID: 151716, guid: 12c5a55af1c6d0b409a680085a5d4c56, type: 2}
+  - POVNodesOriginal: {fileID: 195464, guid: e58e4327a11552f46bf06084253a2efa, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
