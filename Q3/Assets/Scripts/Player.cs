@@ -6,6 +6,10 @@ namespace comp476a2
 {
     public class Player : MonoBehaviour
     {
+        Vector3 velocity = Vector3.zero;
+        public float desiredSlowVelocity = .1f;
+        public int maxVelocity = 4;
+        public int maxAcceleration = 30;
         bool firstClick = true;
 		bool playerSpawned = false;
         bool onTheMove = false;
@@ -16,7 +20,8 @@ namespace comp476a2
 		Vector3[] solutionPath;
         int targetNode = 0;
         float movementSpeed = 20f;
-		float satisfactionRadius = 0.25f;
+		public float satisfactionRadius = 0.25f;
+        public float slowDownRadius = 1f;
 		public GameObject walls;
 		mapScript wallScript;
 		public Movement movementScript;
@@ -41,6 +46,8 @@ namespace comp476a2
                     {
                         if (firstClick && hit.collider.tag == "node")
                         {
+
+                            wallScript.nodeColorReset();
                             transform.position = hit.transform.position;
                             //transform.renderer.enabled = true;
                             hit.transform.renderer.material.color = Color.red;
@@ -49,6 +56,8 @@ namespace comp476a2
                         }
 						else if(firstClick && hit.collider.tag == "Cluster")
 						{
+
+                            wallScript.nodeColorReset();
 							GameObject closestNode = null;
 							float closest = 1000f;
 							foreach(Collider node in Physics.OverlapSphere(hit.point, sphereCastRadius))
@@ -123,32 +132,53 @@ namespace comp476a2
 					converSolutionPath();
 				else
 				{
-					if(targetNode != solutionPath.Length)
-					{
-						transform.position += getMovement(solutionPath[targetNode]) * Time.deltaTime * 5;
-						//movementScript.Steering_Arrive(solutionPath[targetNode], true);
-						if((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
-						{
-							
-							++targetNode;
-						}
-					}
-					else
-					{
-						targetNode = 0;
-						onTheMove = false;
-						//firstClick = true;
-						pathFinder = null;
-						solutionPath = null;
-						wallScript.nodeColorReset();
-						startPos = endPos; 
-						startPos.renderer.material.color = Color.red;
-						endPos = null;
-					}
+                    if (targetNode != solutionPath.Length)
+                    {
+
+                        //transform.position += getMovement(solutionPath[targetNode]) * Time.deltaTime * 5;
+                        velocity += getAcceleration(solutionPath[targetNode]) * Time.deltaTime;
+                        velocity += getDecelleration(solutionPath[targetNode]) * Time.deltaTime;
+                        transform.position += Vector3.ClampMagnitude(velocity, maxVelocity)*Time.deltaTime;
+                        Debug.Log("Distance from target = " + (solutionPath[targetNode] - transform.position).magnitude );
+                        if ((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
+                        {
+
+                            ++targetNode;
+                        }
+                    }
+                    else
+                    {
+                        targetNode = 0;
+                        onTheMove = false;
+                        //firstClick = true;
+                        pathFinder = null;
+                        solutionPath = null;
+                        startPos = endPos;
+                        startPos.renderer.material.color = Color.red;
+                        endPos = null;
+                    }
 				}
 			}
 		}
 
+        private Vector3 getVelocity(Vector3 target)
+        {
+            velocity += getAcceleration(target);
+            return Vector3.ClampMagnitude(velocity, maxVelocity);
+        }
+        private Vector3 getDecelleration(Vector3 target)
+        {
+            Vector3 temp = -Vector3.ClampMagnitude((velocity + getAcceleration(target)), maxVelocity);
+            Vector3 newVelocity = temp * (1 / Mathf.Pow((transform.position - target).magnitude, 2));
+            if (newVelocity.magnitude > desiredSlowVelocity)
+                return newVelocity;
+            else
+                return temp.normalized * desiredSlowVelocity;
+        }
+        private Vector3 getAcceleration(Vector3 target)
+        {
+            return Vector3.ClampMagnitude((target - transform.position), maxAcceleration);
+        }
 		private Vector3 getMovement(Vector3 target)
 		{
 			Vector3 temp = (target - transform.position);

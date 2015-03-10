@@ -4,8 +4,6 @@ C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\Assembly-
 C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
 C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\UnityEditor.dll
 C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\UnityEngine.dll
-C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
 C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\obj\Debug\Assembly-CSharp.pdb
 C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\UnityEngine.xml
 C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\UnityEditor.xml
-C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
