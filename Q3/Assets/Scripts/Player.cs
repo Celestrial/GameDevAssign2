@@ -19,9 +19,11 @@ namespace comp476a2
 		float satisfactionRadius = 0.25f;
 		public GameObject walls;
 		mapScript wallScript;
+		public Movement movementScript;
         // Use this for initialization
         void Start()
         {
+			movementScript = GetComponent<Movement>();
 			wallScript = walls.GetComponent<mapScript>();
         }
 
@@ -40,7 +42,7 @@ namespace comp476a2
                         if (firstClick && hit.collider.tag == "node")
                         {
                             transform.position = hit.transform.position;
-                            transform.renderer.enabled = true;
+                            //transform.renderer.enabled = true;
                             hit.transform.renderer.material.color = Color.red;
                             startPos = hit.collider.gameObject;
                             firstClick = false;
@@ -59,7 +61,7 @@ namespace comp476a2
 							}
 							//hit.transform.renderer.material.color = Color.green;
 							transform.position = closestNode.transform.position;
-							transform.renderer.enabled = true;
+							//transform.renderer.enabled = true;
 							closestNode.transform.renderer.material.color = Color.red;
 							startPos = closestNode.collider.gameObject;
 							firstClick = false;
@@ -124,6 +126,7 @@ namespace comp476a2
 					if(targetNode != solutionPath.Length)
 					{
 						transform.position += getMovement(solutionPath[targetNode]) * Time.deltaTime * 5;
+						//movementScript.Steering_Arrive(solutionPath[targetNode], true);
 						if((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
 						{
 							

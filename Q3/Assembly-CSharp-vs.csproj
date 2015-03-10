@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\BinTree.cs" />
      <Compile Include="Assets\Scripts\FPCameraScript.cs" />
      <Compile Include="Assets\Scripts\FlexHeap.cs" />
+     <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Node.cs" />
      <Compile Include="Assets\Scripts\NodeRecord.cs" />
      <Compile Include="Assets\Scripts\NodeScript.cs" />
