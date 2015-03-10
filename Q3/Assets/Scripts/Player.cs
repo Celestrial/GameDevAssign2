@@ -9,6 +9,7 @@ namespace comp476a2
         bool firstClick = true;
 		bool playerSpawned = false;
         bool onTheMove = false;
+		float sphereCastRadius = 5f;
         GameObject startPos;
         GameObject endPos;
         AStarAlgorithm pathFinder;
@@ -44,7 +45,26 @@ namespace comp476a2
                             startPos = hit.collider.gameObject;
                             firstClick = false;
                         }
-                        else
+						else if(firstClick && hit.collider.tag == "Cluster")
+						{
+							GameObject closestNode = null;
+							float closest = 1000f;
+							foreach(Collider node in Physics.OverlapSphere(hit.point, sphereCastRadius))
+							{
+								if((hit.point - node.transform.position).magnitude < closest)
+								{
+									closest = (hit.point - node.transform.position).magnitude;
+									closestNode = node.gameObject;
+								}
+							}
+							//hit.transform.renderer.material.color = Color.green;
+							transform.position = closestNode.transform.position;
+							transform.renderer.enabled = true;
+							closestNode.transform.renderer.material.color = Color.red;
+							startPos = closestNode.collider.gameObject;
+							firstClick = false;
+						}
+						else if(!firstClick && hit.collider.tag == "node")
                         {
                             hit.transform.renderer.material.color = Color.green;
                             endPos = hit.collider.gameObject;
@@ -53,9 +73,32 @@ namespace comp476a2
                             pathFinder = new AStarAlgorithm(startPos, endPos);
                             pathFinder.findPath();
                             onTheMove = true;
+							firstClick = true;
                         }
+						else if(!firstClick && hit.collider.tag == "Cluster")
+						{
+							GameObject closestNode = null;
+							float closest = 1000f;
+							foreach(Collider node in Physics.OverlapSphere(hit.point, sphereCastRadius))
+							{
+								if(node.transform.tag == "node" && (hit.point - node.transform.position).magnitude < closest)
+								{
+									closest = (hit.point - node.transform.position).magnitude;
+									closestNode = node.gameObject;
+								}
+							}
+							closestNode.transform.renderer.material.color = Color.green;
+							endPos = closestNode;
+							NodeScript temp = startPos.gameObject.GetComponent<NodeScript>();
+							onTheMove = true;
+							pathFinder = new AStarAlgorithm(startPos, endPos);
+							pathFinder.findPath();
+							onTheMove = true;
+							firstClick = true;
+						}else{}
                     }
                 }
+
                 if(Input.GetKeyDown(KeyCode.D))
                 {
                     if (NodeRecord.heuristicWeight == 1)
@@ -68,7 +111,6 @@ namespace comp476a2
                     wallScript.switchMapType();
                 }
             }
-
         }
 
 		void FixedUpdate()
