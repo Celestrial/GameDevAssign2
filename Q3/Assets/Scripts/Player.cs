@@ -9,7 +9,7 @@ namespace comp476a2
         public static float maximumSeekVelocity = 15f, maximumRotationVelocity = 2f,
         maximumFleeVelocity = 10f, maximumAcceleration = 0.05f, maxinumRotationAcceleration = 0.01f;
         float currentVelocity = 0, currentRotationVelocity = 0, currentAcceleration = 0.05f;
-
+        public int FOV = 30;
         Vector3 directionVector = Vector3.zero;
         public float desiredSlowVelocity = .1f;
         public int maxVelocity = 4;
@@ -22,8 +22,8 @@ namespace comp476a2
         AStarAlgorithm pathFinder;
 		Vector3[] solutionPath;
         int targetNode = 0;
-		public float satisfactionRadius = 2f;
-        public float slowDownRadius = 2f;
+		public float satisfactionRadius = 1.5f;
+        public float slowDownRadius = .25f;
 		public GameObject walls;
 		mapScript wallScript;
 		public Movement movementScript;
@@ -147,9 +147,11 @@ namespace comp476a2
                         Quaternion targetRotation = Quaternion.LookRotation(directionVector);
                         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, currentRotationVelocity * Time.deltaTime);
                         //Update the position
-                        Vector3 newPosition = transform.position + (currentVelocity * Time.deltaTime) * transform.forward.normalized;
-                        transform.position = newPosition;
-
+                        if (Quaternion.Angle(targetRotation, transform.rotation) < FOV)
+                        {
+                            Vector3 newPosition = transform.position + (currentVelocity * Time.deltaTime) * transform.forward.normalized;
+                            transform.position = newPosition;
+                        }
 
                         if (targetNode != solutionPath.Length-1 && (transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
                         {
