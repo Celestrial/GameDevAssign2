@@ -12,7 +12,7 @@ namespace comp476a2
 	    public int dimention = 100;
 	    public Vector3 POVMapStartPos = new Vector3(46.604f, 38.703f, 33.637f);
 		public List<GameObject> masterNodeList;
-		bool nodeMap = true;
+		public bool nodeMap = true;
 		// Use this for initialization
 		void Start () {
 			masterNodeList = new List<GameObject>();

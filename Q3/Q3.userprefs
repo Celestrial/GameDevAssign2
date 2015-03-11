@@ -1,12 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\Google Drive\school\WINTER 2015\COMP 476\Assignment1\Sean_celestin_476_A1Practicle\Assets\Scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player.cs">
     <Files>
-      <File FileName="..\..\..\Google Drive\school\WINTER 2015\COMP 476\Assignment1\Sean_celestin_476_A1Practicle\Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player.cs" Line="20" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\Player.cs" line="95" />
+      <Breakpoint file="C:\Users\CELESTRIAL\Documents\GameDevAssign2\Q3\Assets\Scripts\Player.cs" line="73" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

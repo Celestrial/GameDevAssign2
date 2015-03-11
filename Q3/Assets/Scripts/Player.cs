@@ -17,6 +17,7 @@ namespace comp476a2
         bool firstClick = true;
         bool onTheMove = false;
 		float sphereCastRadius = 5f;
+		int povSpaceFactor = 25;
         GameObject startPos;
         GameObject endPos;
         AStarAlgorithm pathFinder;
@@ -61,9 +62,9 @@ namespace comp476a2
                             wallScript.nodeColorReset();
 							GameObject closestNode = null;
 							float closest = 1000f;
-							foreach(Collider node in Physics.OverlapSphere(hit.point, sphereCastRadius))
+							foreach(Collider node in Physics.OverlapSphere(hit.point, wallScript.nodeMap ? sphereCastRadius : sphereCastRadius * povSpaceFactor))
 							{
-								if((hit.point - node.transform.position).magnitude < closest)
+								if(node.transform.tag == "node" && (hit.point - node.transform.position).magnitude < closest)
 								{
 									closest = (hit.point - node.transform.position).magnitude;
 									closestNode = node.gameObject;
@@ -89,7 +90,7 @@ namespace comp476a2
 						{
 							GameObject closestNode = null;
 							float closest = 1000f;
-							foreach(Collider node in Physics.OverlapSphere(hit.point, sphereCastRadius))
+                            foreach (Collider node in Physics.OverlapSphere(hit.point, wallScript.nodeMap ? sphereCastRadius : sphereCastRadius * povSpaceFactor))
 							{
 								if(node.transform.tag == "node" && (hit.point - node.transform.position).magnitude < closest)
 								{
