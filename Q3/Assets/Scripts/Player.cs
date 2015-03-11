@@ -6,12 +6,15 @@ namespace comp476a2
 {
     public class Player : MonoBehaviour
     {
-        Vector3 velocity = Vector3.zero;
+        public static float maximumSeekVelocity = 15f, maximumRotationVelocity = 2f,
+        maximumFleeVelocity = 10f, maximumAcceleration = 0.05f, maxinumRotationAcceleration = 0.01f;
+        float currentVelocity = 0, currentRotationVelocity = 0, currentAcceleration = 0.05f;
+
+        Vector3 directionVector = Vector3.zero;
         public float desiredSlowVelocity = .1f;
         public int maxVelocity = 4;
         public int maxAcceleration = 30;
         bool firstClick = true;
-		bool playerSpawned = false;
         bool onTheMove = false;
 		float sphereCastRadius = 5f;
         GameObject startPos;
@@ -19,9 +22,8 @@ namespace comp476a2
         AStarAlgorithm pathFinder;
 		Vector3[] solutionPath;
         int targetNode = 0;
-        float movementSpeed = 20f;
-		public float satisfactionRadius = 0.25f;
-        public float slowDownRadius = 1f;
+		public float satisfactionRadius = 2f;
+        public float slowDownRadius = 2f;
 		public GameObject walls;
 		mapScript wallScript;
 		public Movement movementScript;
@@ -49,7 +51,6 @@ namespace comp476a2
 
                             wallScript.nodeColorReset();
                             transform.position = hit.transform.position;
-                            //transform.renderer.enabled = true;
                             hit.transform.renderer.material.color = Color.red;
                             startPos = hit.collider.gameObject;
                             firstClick = false;
@@ -68,9 +69,7 @@ namespace comp476a2
 									closestNode = node.gameObject;
 								}
 							}
-							//hit.transform.renderer.material.color = Color.green;
 							transform.position = closestNode.transform.position;
-							//transform.renderer.enabled = true;
 							closestNode.transform.renderer.material.color = Color.red;
 							startPos = closestNode.collider.gameObject;
 							firstClick = false;
@@ -134,17 +133,35 @@ namespace comp476a2
 				{
                     if (targetNode != solutionPath.Length)
                     {
+                        //Find the direction vector based on the target's position
+                        directionVector = (solutionPath[targetNode] - transform.position);
+                        directionVector.Normalize();
+                        //Find the current rotation velocity
+                        currentRotationVelocity = Mathf.Min(currentRotationVelocity + maxinumRotationAcceleration, maximumRotationVelocity);
+                        //Create a goal velocity that is proportional to the distance to the target (interpolated from 0 to max)
+                        float goalVelocity = maximumSeekVelocity * ((solutionPath[targetNode] - transform.position).magnitude / 15f);
+                        currentVelocity = Mathf.Min(currentVelocity + currentAcceleration, maximumFleeVelocity);
+                        //Calculate the current acceleration based on the goal velocity and the current velocity
+                        currentAcceleration = Mathf.Min((goalVelocity - currentVelocity) / 2, maximumAcceleration);
+                        //Interpolate the orientation of the NPC object
+                        Quaternion targetRotation = Quaternion.LookRotation(directionVector);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, currentRotationVelocity * Time.deltaTime);
+                        //Update the position
+                        Vector3 newPosition = transform.position + (currentVelocity * Time.deltaTime) * transform.forward.normalized;
+                        transform.position = newPosition;
 
-                        //transform.position += getMovement(solutionPath[targetNode]) * Time.deltaTime * 5;
-                        velocity += getAcceleration(solutionPath[targetNode]) * Time.deltaTime;
-                        velocity += getDecelleration(solutionPath[targetNode]) * Time.deltaTime;
-                        transform.position += Vector3.ClampMagnitude(velocity, maxVelocity)*Time.deltaTime;
-                        Debug.Log("Distance from target = " + (solutionPath[targetNode] - transform.position).magnitude );
-                        if ((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
+
+                        if (targetNode != solutionPath.Length-1 && (transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius)
                         {
 
                             ++targetNode;
                         }
+                        else if ((transform.position - solutionPath[targetNode]).magnitude <= satisfactionRadius * .125f)
+                        {
+                            Debug.Log("In last node!!!");
+                            ++targetNode;
+                        }
+                        Debug.Log(solutionPath.Length - targetNode + " nodes from the end");
                     }
                     else
                     {
@@ -161,32 +178,7 @@ namespace comp476a2
 			}
 		}
 
-        private Vector3 getVelocity(Vector3 target)
-        {
-            velocity += getAcceleration(target);
-            return Vector3.ClampMagnitude(velocity, maxVelocity);
-        }
-        private Vector3 getDecelleration(Vector3 target)
-        {
-            Vector3 temp = -Vector3.ClampMagnitude((velocity + getAcceleration(target)), maxVelocity);
-            Vector3 newVelocity = temp * (1 / Mathf.Pow((transform.position - target).magnitude, 2));
-            if (newVelocity.magnitude > desiredSlowVelocity)
-                return newVelocity;
-            else
-                return temp.normalized * desiredSlowVelocity;
-        }
-        private Vector3 getAcceleration(Vector3 target)
-        {
-            return Vector3.ClampMagnitude((target - transform.position), maxAcceleration);
-        }
-		private Vector3 getMovement(Vector3 target)
-		{
-			Vector3 temp = (target - transform.position);
-			Vector3.ClampMagnitude(temp, movementSpeed);
-			return temp;
-		}
-
-        private void converSolutionPath()
+         private void converSolutionPath()
         {
             solutionPath = new Vector3[pathFinder.getSolutionPath().Count];
             for (int i = 0; i < solutionPath.Length; ++i)
