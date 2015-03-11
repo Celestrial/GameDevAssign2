@@ -56,6 +56,9 @@
      <Compile Include="Assets\Scripts\NodeScript.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\mapScript.cs" />
+     <None Include="Assets\Palm Trees\Shaders\WavingDoublePassNoCullBackface.shader" />
+     <None Include="Assets\Forest Grounds - Terrain Texture Pack\Readme.txt" />
+     <None Include="Assets\Palm Trees\Shaders\WavingDoublePassCullBackface.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
