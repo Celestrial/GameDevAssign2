@@ -99,28 +99,32 @@ namespace comp476a2
 			if(Physics.Linecast(transform.position, transform.position + transform.forward * LINE_LENGTH, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[0] = hit.collider.gameObject;
-				neighbours[0].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[0].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, transform.position + transform.forward * LINE_LENGTH);
 
 			if(Physics.Linecast(transform.position, transform.position + transform.right * LINE_LENGTH, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[1] = hit.collider.gameObject;
-				neighbours[1].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[1].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, transform.position + transform.right * LINE_LENGTH);
 
 			if(Physics.Linecast(transform.position, transform.position - transform.forward * LINE_LENGTH, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[2] = hit.collider.gameObject;
-				neighbours[2].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[2].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, transform.position - transform.forward * LINE_LENGTH);
 
 			if(Physics.Linecast(transform.position, transform.position - transform.right * LINE_LENGTH, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[3] = hit.collider.gameObject;
-				neighbours[3].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[3].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, transform.position - transform.right * LINE_LENGTH);
 
@@ -129,7 +133,8 @@ namespace comp476a2
 			if(Physics.Linecast(transform.position, temp, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[4] = hit.collider.gameObject;
-				neighbours[4].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[4].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, temp);
 
@@ -137,7 +142,8 @@ namespace comp476a2
 			if(Physics.Linecast(transform.position, temp, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[5] = hit.collider.gameObject;
-				neighbours[5].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[5].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, temp);
 
@@ -145,7 +151,8 @@ namespace comp476a2
 			if(Physics.Linecast(transform.position, temp, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[6] = hit.collider.gameObject;
-				neighbours[6].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[6].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, temp);
 
@@ -153,7 +160,8 @@ namespace comp476a2
 			if(Physics.Linecast(transform.position, temp, out hit) && hit.collider.tag == "node")
 			{
 				neighbours[7] = hit.collider.gameObject;
-				neighbours[7].renderer.material.color = Color.black;
+				Color tempColor = new Color(0,0,0,.25f);
+				neighbours[7].renderer.material.color = tempColor;
 			}
 			Debug.DrawLine (transform.position, temp);
 		}

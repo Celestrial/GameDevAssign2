@@ -30,7 +30,10 @@ namespace comp476a2
 			foreach(GameObject node in masterNodeList)
 			{
 	            if(null != node)
-				    node.renderer.material.color = Color.black;
+				{
+					Color temp = new Color(0,0,0,.25f);
+				    node.renderer.material.color = temp;
+				}
 			}
 		}
 
